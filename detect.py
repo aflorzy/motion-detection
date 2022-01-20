@@ -52,16 +52,13 @@ while True:
     cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"),
                 (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
 
-    # cv2.imshow("Security Feed", frame)
-    thresh = thresh[top:bottom, left:right]
-    # cv2.imshow("Thresh", thresh)
-    # cv2.imshow("Frame Delta", frameDelta)
-
-    # sky = frame[top:bottom, left:right]
-    # cv2.imshow('frame', sky)
-    cv2.rectangle(thresh, (left,top), (right, bottom), (0, 255, 0), 5)
-    # cv2.imshow('frame', gray)
+    # Original, color feed with boxes
+    cv2.imshow("Security Feed", frame)
+    # Resize threshold region
+    # thresh = thresh[top:bottom, left:right]
     cv2.imshow("Thresh", thresh)
+    # Cool-looking feed with differences shown by grayscale intensities
+    cv2.imshow("Frame Delta", frameDelta)
 
 
     if cv2.waitKey(1) == ord('q'):
