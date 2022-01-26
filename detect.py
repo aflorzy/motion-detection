@@ -13,6 +13,8 @@ bottom = int((height/2)+(height*0.1))
 
 firstFrame = None
 text = "Unoccupied"
+frameCount = 0
+
 while True:
     # Start camera video capture
     ret, frame = cap.read()
@@ -20,6 +22,13 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # Add blur/smooth frame
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
+
+    if text == "Occupied":
+        frameCount += 1
+    # If object is still for > 5 seconds (30fps camera), reset frame
+        if frameCount >= 150:
+            firstFrame = None
+            frameCount = 0
 
     # Initialize firstFrame (background)
     if firstFrame is None:
